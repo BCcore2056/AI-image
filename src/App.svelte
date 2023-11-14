@@ -1,22 +1,33 @@
 <script lang="ts">
-  import { HfInference } from "@huggingface/inference"; // importujemy potrzebne narzędzie z biblioteki HuggingFace
-  let userInput: string;
-  const hf = new HfInference(import.meta.env.VITE_HUGGING_FACE_ACCESS_TOKEN); // konfigurujemy narzędzie z naszym kluczem dostępu
+  import { HfInference } from "@huggingface/inference";
+  userInput: string;
+  let imagePromise: Promise<string>;
+
+  const hf = new HfInference(import.meta.env.VITE_HUGGING_FACE_ACCESS_TOKEN);
 
   async function ask() {
     const blob = await hf.textToImage({
-      // interesujący nas sposób interakcji z danym modelem - w tym wypadku wpisany tekst zamieniany na wygenerowany obraz
-      model: "stabilityai/stable-diffusion-xl-base-1.0", // konkretny model ze strony HuggingFace
-      inputs: userInput, // dane wejściowe użytkownika
+      model: "stabilityai/stable-diffusion-xl-base-1.0",
+      inputs: userInput,
     });
     return URL.createObjectURL(blob);
+  }
+
+  function generateImage() {
+    imagePromise = ask();
   }
 </script>
 
 <main>
-    <!-- Tutaj wpisz własny kod układu strony -->
+    <input bind:value={userInput} />
+    <button on:click={generateImage}>Generate</button>
+    {#if imagePromise}
+      {#await imagePromise}
+        Loading...
+      {:then result}
+        <img width=320 height=320 src={result} alt="Ai generated image"/>
+      {/await}
+    {:else}
+      No image generated
+    {/if}
 </main>
-
-<style>
-    /* Tu znajdzie się kod odpowiadający za wygląd strony */
-</style>

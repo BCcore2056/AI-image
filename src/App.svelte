@@ -17,3 +17,17 @@
     imagePromise = ask();
   }
 </script>
+
+<main>
+    <input bind:value={userInput} />
+    <button on:click={generateImage}>Generate</button>
+    {#if imagePromise}
+      {#await imagePromise}
+        Loading...
+      {:then result}
+        <img width=320 height=320 src={result} alt="Ai generated image"/>
+      {/await}
+    {:else}
+      No image generated
+    {/if}
+</main>

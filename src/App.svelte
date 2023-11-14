@@ -25,6 +25,7 @@
       {#await imagePromise}
         Loading...
       {:then result}
+        <!-- svelte-ignore a11y-img-redundant-alt -->
         <img width=320 height=320 src={result} alt="Ai generated image"/>
       {/await}
     {:else}

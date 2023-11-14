@@ -1,6 +1,6 @@
 <script lang="ts">
   import { HfInference } from "@huggingface/inference";
-  userInput: string;
+  let userInput: string;
   let imagePromise: Promise<string>;
 
   const hf = new HfInference(import.meta.env.VITE_HUGGING_FACE_ACCESS_TOKEN);

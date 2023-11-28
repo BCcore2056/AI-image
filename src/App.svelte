@@ -24,20 +24,22 @@
         <!-- Tutaj wpisz własny kod układu strony -->
         <input bind:value={userInput} />
         <button on:click={generateImage}>Generate</button>
-        {#if imagePromise}
-          {#await imagePromise}
-            <!-- tutaj oczekujemy -->
-          Loading...
-          {:then result}
-            <!-- wynik jest znany -->
-            <img width=320 height=320 src={result} alt="Ai generated"/>
-          {:catch}
-            <!-- coś się nie udało... -->
-            Oops! Failed to generate the image
-          {/await}
-        {:else}
-          No image generated
-        {/if}
+        <div class="generated-image">
+          {#if imagePromise}
+            {#await imagePromise}
+              <!-- tutaj oczekujemy -->
+            Loading...
+            {:then result}
+              <!-- wynik jest znany -->
+              <img width=320 height=320 src={result} alt="Ai generated"/>
+            {:catch}
+              <!-- coś się nie udało... -->
+              Oops! Failed to generate the image
+            {/await}
+          {:else}
+            No image generated
+          {/if}
+      </div>
     </div>
 </main>
 
@@ -71,7 +73,8 @@
     text-align: center;
   }
 
-  .centered {
+  .generated-image {
+    color: white
     
   }
 </style>

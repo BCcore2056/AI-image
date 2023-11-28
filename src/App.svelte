@@ -79,6 +79,7 @@
     border: solid;
     border-width: 8px;
     border-radius: 20px;
+    box-shadow: 10px 0px 75px black;
     
   }
 

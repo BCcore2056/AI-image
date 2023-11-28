@@ -73,6 +73,10 @@
     text-align: center;
   }
 
+  button:hover{
+    box-shadow: 0 0 10px black;
+  }
+
   .centered {
     background-color: #888 ;
     padding: 20px;

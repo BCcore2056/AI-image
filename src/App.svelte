@@ -73,6 +73,15 @@
     text-align: center;
   }
 
+  .centered {
+    background-color: #888 ;
+    padding: 20px;
+    border: solid;
+    border-width: 8px;
+    border-radius: 20px;
+    
+  }
+
   .generated-image {
     color: white
     
